@@ -1,0 +1,32 @@
+@import url(../vendor/normalize.css);
+
+@import url(../blocks/page/page.css);
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar/_image/profile__avatar_image.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__info/_edit/profile__info_button.css);
+@import url(../blocks/profile/__info/_subtitle/profile__info_subtitle.css);
+@import url(../blocks/profile/__info/_title/profile__info_title.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__add-button/_vector/profile__add-button_vector.css);
+
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__group/element__group.css);
+@import url(../blocks/element/__group/_vector/element__group_vector.css);
+@import url(../blocks/element/__mask-group/element__mask-group.css);
+@import url(../blocks/element/__mask-group/_image/element__mask-group_image.css);
+@import url(../blocks/element/__mask-group/_layer/element__mask-group_layer.css);
+@import url(../blocks/element/__rectangle/element__rectangle.css);
+@import url(../blocks/element/__title/element__title.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+
+

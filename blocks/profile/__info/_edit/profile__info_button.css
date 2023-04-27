@@ -1,0 +1,9 @@
+.profile__info_button {
+    background-image: url(../../../../images/profile__button.png);
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    background-size: contain;
+    border: none;
+    outline: none;
+}
