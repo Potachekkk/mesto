@@ -6,22 +6,89 @@
     <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto Russia</title>
   </head>
-  <body class="page">
-    <header class="header">
-        <img class="header__logo" src="./images/main_logo.svg" alt="Место Россия">
-    </header>
-
-    <section class="profile">
-        <div class="profile__avatar">
-            <img class="profile__avatar_image" src="./images/avatar_image.jpg" alt="аватар">
-        </div>
-        <div class="profile__info">
-            <h1 class="profile__info_title">Жак-Ив Кусто</h1>
-            <p class="profile__info_subtitle">Исследователь океана</p>
-            <button type="button" class="profile__info_button"></button>
-        </div>
-        <button type="button" class="profile__add-button">
-            <img class="profile__add-button_vector" src="./images/add_button_vector.svg" alt="ПЛЮСИК">
-        </button>
-    </section>
+  <body class="root">
+    <div class="page">
+      <header class="header">
+          <img class="header__logo" src="./images/main_logo.svg" alt="Место Россия">
+      </header>
+      <main class="content">
+        <section class="profile">
+          <div class="profile__column">
+            <img class="profile__avatar" src="./images/avatar_image.jpg" alt="аватар">
+            <div class="profile__info">
+                <h1 class="profile__info_title">Жак-Ив Кусто</h1>
+                <button type="button" class="profile__info_button"></button>
+                <p class="profile__info_subtitle">Исследователь океана</p>
+            </div>
+          </div>
+            <button type="button" class="profile__add-button">
+                <img class="profile__add-button_vector" src="./images/add_button_vector.svg" alt="ПЛЮСИК">
+            </button>
+        </section>
+        <section class="elements">
+          <ul class="elements__container">
+            <li class="element">
+              <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
+              <div class="element__info">
+                <h2 class="element__title">Карачаевск</h2>
+                <div class="element__like">
+                  <button class="element__like_button" type="button"></button>
+                  <p class="element__like_count"></p>
+                </div>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус">
+              <div class="element__info">
+                <h2 class="element__title">Гора Эльбрус</h2>
+                <div class="element__like">
+                  <button class="element__like_button" type="button"></button>
+                  <p class="element__like_count"></p>
+                </div>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/Dombai.jpg" alt="Домбай">
+              <div class="element__info">
+                <h2 class="element__title">Домбай</h2>
+                <div class="element__like">
+                  <button class="element__like_button" type="button"></button>
+                  <p class="element__like_count"></p>
+                </div>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус">
+              <div class="element__info">
+                <h2 class="element__title">Гора Эльбрус</h2>
+                <div class="element__like">
+                  <button class="element__like_button" type="button"></button>
+                  <p class="element__like_count"></p>
+                </div>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/Dombai.jpg" alt="Домбай">
+              <div class="element__info">
+                <h2 class="element__title">Домбай</h2>
+                <div class="element__like">
+                  <button class="element__like_button" type="button"></button>
+                  <p class="element__like_count"></p>
+                </div>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
+              <div class="element__info">
+                <h2 class="element__title">Карачаево-Черкесия</h2>
+                <div class="element__like">
+                  <button class="element__like_button" type="button"></button>
+                  <p class="element__like_count"></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+    </div>
   </body>
