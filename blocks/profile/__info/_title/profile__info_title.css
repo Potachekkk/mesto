@@ -9,15 +9,11 @@
     max-width: 350px;
 }
 
-
 @media screen and (max-width: 720px) {
     .profile__info_title {
         font-size: 27px;
-        font-style: normal;
-        font-weight: 500;
         line-height: 33px;
         max-width: 280px;
         text-align: center;
-
-        }
+    }
 }

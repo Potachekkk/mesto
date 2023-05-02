@@ -5,4 +5,14 @@
     height: 19px;
     border: none;
     padding: 0;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.element__like_button:hover {
+    opacity: .5;
+}
+
+.element__like_button_active {
+    background-image: url(../../../../images/black_heart.svg);
 }

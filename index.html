@@ -33,7 +33,6 @@
                 <h2 class="element__title">Карачаевск</h2>
                 <div class="element__like">
                   <button class="element__like_button" type="button"></button>
-                  <p class="element__like_count"></p>
                 </div>
               </div>
             </li>
@@ -43,7 +42,6 @@
                 <h2 class="element__title">Гора Эльбрус</h2>
                 <div class="element__like">
                   <button class="element__like_button" type="button"></button>
-                  <p class="element__like_count"></p>
                 </div>
               </div>
             </li>
@@ -53,7 +51,6 @@
                 <h2 class="element__title">Домбай</h2>
                 <div class="element__like">
                   <button class="element__like_button" type="button"></button>
-                  <p class="element__like_count"></p>
                 </div>
               </div>
             </li>
@@ -63,7 +60,6 @@
                 <h2 class="element__title">Гора Эльбрус</h2>
                 <div class="element__like">
                   <button class="element__like_button" type="button"></button>
-                  <p class="element__like_count"></p>
                 </div>
               </div>
             </li>
@@ -73,7 +69,6 @@
                 <h2 class="element__title">Домбай</h2>
                 <div class="element__like">
                   <button class="element__like_button" type="button"></button>
-                  <p class="element__like_count"></p>
                 </div>
               </div>
             </li>
@@ -82,15 +77,14 @@
               <div class="element__info">
                 <h2 class="element__title">Карачаево-Черкесия</h2>
                 <div class="element__like">
-                  <button class="element__like_button" type="button"></button>
-                  <p class="element__like_count"></p>
+                  <button class="element__like_button element__like_button_active" type="button"></button>
                 </div>
               </div>
             </li>
           </ul>
         </section>
       </main>
-      <footer class="footer">
+      <footer class="footer root__section">
         <p class="footer__copyright">© 2023 Mesto Russia</p>
       </footer>
       <div class="popup">
@@ -101,8 +95,8 @@
           <form name="popup" class="popup__form popup__form_type_profile">
             <input name="name" class="popup__input popup__input_type_name" required placeholder="Имя" id="name" minlength="2" maxlength="40">
             <input name="about" class="popup__input popup__input_type_about" required placeholder="О себе" id="about" minlength="2" maxlength="200">
+            <button type="submit" class="popup__save">Сохранить</button>
           </form>
-          <button type="submit" class="popup__save">Сохранить</button>
         </div>
       </div>
     </div>

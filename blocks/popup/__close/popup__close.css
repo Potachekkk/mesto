@@ -9,6 +9,11 @@
     transition: opacity .2s;
     width: 32px;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+.popup__close:hover {
+    opacity: 0.6;
 }
 
 @media screen and (max-width: 550px) {
