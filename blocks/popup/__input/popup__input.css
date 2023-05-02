@@ -13,3 +13,14 @@
     white-space: nowrap;
     width: 358px;
 }
+
+.popup__input:last-child {
+    margin-bottom: 45px;
+}
+
+@media screen and (max-width: 550px) {
+    .popup__input {
+        max-width: 238px;
+        margin: 0 22px 30px;
+    }
+}

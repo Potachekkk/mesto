@@ -14,3 +14,10 @@
     transition: opacity .2s;
     width: 358px;
 }
+
+@media screen and (max-width: 550px) {
+    .popup__save {
+        max-width: 238px;
+        margin: 0 22px 25px;
+    }
+}
