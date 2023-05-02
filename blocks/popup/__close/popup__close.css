@@ -6,7 +6,6 @@
     position: absolute;
     right: -40px;
     top: -40px;
-    transition: opacity .2s;
     width: 32px;
     cursor: pointer;
     transition: 0.5s;
