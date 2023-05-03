@@ -6,8 +6,8 @@ const togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popu
 
 const nameInput = document.querySelector('.popup__input_type_name');
 const aboutInput = document.querySelector('.popup__input_type_about');
-const ProfileInfoTitle = document.querySelector('.profile__info_title');
-const ProfileInfoSubtitle = document.querySelector('.profile__info_subtitle');
+const ProfileInfoTitle = document.querySelector('.profile__title');
+const ProfileInfoSubtitle = document.querySelector('.profile__subtitle');
 const PopupSaveButton = document.querySelector('.popup__save');
 
 popupOpenButton.addEventListener('click', () => togglePopupState(popup),
