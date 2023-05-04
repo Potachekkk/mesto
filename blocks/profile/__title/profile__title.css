@@ -7,8 +7,8 @@
     color: #FFFFFF;
     align-self: end;
     max-width: 350px;
-    text-overflow: ellipsis;   
-    white-space: nowrap;   
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
 }
 
