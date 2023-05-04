@@ -14,12 +14,8 @@
 @media screen and (max-width: 1000px) {
     .profile__subtitle {
         font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
         grid-column-end: 3;
         grid-column-start: 1;
-        grid-row-end: 3;
-        grid-row-start: 2;
         line-height: 17px;
         text-align: center;
     }
@@ -29,13 +25,7 @@
 @media screen and (max-width: 720px) {
     .profile__subtitle {
         font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        grid-column-end: 3;
-        grid-column-start: 1;
-        grid-row-end: 3;
-        grid-row-start: 2;
-        line-height: 17px;
-        text-align: center;
+        margin-right: 16px;
+
     }
 }

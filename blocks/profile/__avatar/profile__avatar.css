@@ -8,16 +8,12 @@
 
 @media screen and (max-width: 1000px) {
     .profile__avatar{
-        flex-direction: column;
         margin: 0 auto 26px;
     }
 }
 
 @media screen and (max-width: 720px) {
     .profile__avatar{
-        flex-direction: column;
-        margin: 0 auto 22.25px;
-        max-width: 120px;
-        height: 120px;
+        margin: 4px auto 22.25px;
     }
 }
