@@ -5,7 +5,7 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const aboutInput = document.querySelector('.popup__input_type_about');
 const profileInfoTitle = document.querySelector('.profile__title');
 const profileInfoSubtitle = document.querySelector('.profile__subtitle');
-const formElement = document.querySelector('.popup__form_type_profile');
+const formElement = document.querySelector('.popup__form');
 
 const togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popup_opened')
 
