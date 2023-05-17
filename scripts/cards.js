@@ -29,10 +29,28 @@ const initialCards = [
 const cardsElement = document.querySelector('.elements__container');
 const templateCards = document.querySelector('.elements__item').content;
 
-initialCards.forEach((item) => {
-    const itemElement = templateCards.cloneNode(true);
-    itemElement.querySelector('.element__image').src = item.link;
-    itemElement.querySelector('.element__title').textContent = item.name;
-    cardsElement.append(itemElement)
+// инпуты
+const placeInput = document.querySelector('.popup__input_type_name');
+const linkInput = document.querySelector('.popup__input_type_link');
 
+const deleteItem = (evt) => {
+  const item = evt.target.closest('.element');
+  item.remove();
+}
+
+initialCards.forEach((item) => {
+  const itemElement = templateCards.cloneNode(true);
+  itemElement.querySelector('.element__image').src = item.link;
+  itemElement.querySelector('.element__title').textContent = item.name;
+  // itemElement.querySelector('.element__like-button').img = item.like;
+  // itemElement.querySelector('.element__delete-button').img = item.basket;
+
+  itemElement.querySelector('.element__delete-button').addEventListener('click', deleteItem);
+  itemElement.querySelector('.element__like-button').addEventListener('click', function (event) {
+    event.target.classList.toggle("element__like-button_active");
+});
+
+
+  cardsElement.append(itemElement)
 })
+

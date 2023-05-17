@@ -28,51 +28,7 @@
           <ul class="elements__container">
 
           </ul>
-
-          <!-- <ul class="elements__container">
-            <li class="element">
-              <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-              <div class="element__info">
-                <h2 class="element__title">Карачаевск</h2>
-                <button aria-label="Поставить сердечко" class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус">
-              <div class="element__info">
-                <h2 class="element__title">Гора Эльбрус</h2>
-                <button aria-label="Поставить сердечко" class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/Dombai.jpg" alt="Домбай">
-              <div class="element__info">
-                <h2 class="element__title">Домбай</h2>
-                <button aria-label="Поставить сердечко" class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/Elbrus.jpg" alt="Эльбрус">
-              <div class="element__info">
-                <h2 class="element__title">Гора Эльбрус</h2>
-                <button aria-label="Поставить сердечко" class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/Dombai.jpg" alt="Домбай">
-              <div class="element__info">
-                <h2 class="element__title">Домбай</h2>
-                <button aria-label="Поставить сердечко" class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-              <div class="element__info">
-                <h2 class="element__title">Карачаево-Черкесия</h2>
-                <button aria-label="Поставить сердечко" class="element__like-button" type="button"></button>
-              </div>
-            </li>
-          </ul> -->
+          
         </section>
       </main>
       <footer class="footer">
@@ -82,6 +38,7 @@
       <template class="elements__item">
         <li class="element">
           <img src="#" alt="#" class="element__image">
+          <button type="button" class="element__delete-button"></button>
           <div class="element__info">
             <h2 class="element__title"></h2>
             <button aria-label="Поставить сердечко" class="element__like-button" type="button"></button>
@@ -91,9 +48,9 @@
 
       <div class="popup popup_type_profile">
         <div class="popup__container">
-          <button aria-label="Закрыть окно" type="button" class="popup__close"></button>
+          <button aria-label="Закрыть окно" type="button" class="popup__close popup__close_type_profile"></button>
           <h2 class="popup__edit">Редактировать профиль</h2>
-          <form name="popup" class="popup__form">
+          <form name="popup" class="popup__form popup__form_type_profile">
             <input name="name" class="popup__input popup__input_type_name" required placeholder="Имя" id="name" minlength="2" maxlength="40">
             <input name="about" class="popup__input popup__input_type_about" required placeholder="О себе" id="about" minlength="2" maxlength="200">
             <button aria-label="Сохранить" type="submit" class="popup__save">Сохранить</button>
@@ -103,13 +60,21 @@
 
       <div class="popup popup_type_add">
         <div class="popup__container">
-          <button aria-label="Закрыть окно" type="button" class="popup__close"></button>
+          <button aria-label="Закрыть окно" type="button" class="popup__close popup__close_type_add"></button>
           <h2 class="popup__edit">Новое место</h2>
-          <form name="popup" class="popup__form">
+          <form name="popup" class="popup__form popup__form_type_add">
             <input name="name" class="popup__input popup__input_type_name" required placeholder="Название" id="place" minlength="2" maxlength="40">
-            <input type="url" name="link" class="popup__input popup__input_type_about" required placeholder="Ссылка на картинку" id="link" minlength="2" maxlength="200">
+            <input type="url" name="link" class="popup__input popup__input_type_link" required placeholder="Ссылка на картинку" id="link" minlength="2" maxlength="200">
             <button aria-label="Сохранить" type="submit" class="popup__save">Создать</button>
           </form>
+        </div>
+      </div>
+
+      <div class="popup popup_type_open_image">
+        <div class="popup__container-image">
+          <img src="#" alt="#" class="popup__picture">
+          <p class="popup_figcaption"></p>
+          <button type="button" class="popup__close popup__close_type_image"></button>
         </div>
       </div>
     </div>
