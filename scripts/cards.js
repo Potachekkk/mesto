@@ -25,14 +25,14 @@ const initialCards = [
     }
   ];
 
-
 const cardsElement = document.querySelector('.elements__container');
 const templateCards = document.querySelector('.elements__item').content;
 
 const createButton = document.querySelector('.popup__save');
-// const popupOpenImageButton = templateCards.querySelector('.element__open-button')
 const popupCloseImageButton = document.querySelector('.popup__close_type_image');
+
 const popupImage = document.querySelector('.popup_type_open_image');
+const popupAdd = document.querySelector('.popup_type_add');
 
 const popupCaption = document.querySelector('.popup__figcaption');
 const popupPicture = document.querySelector('.popup__picture');
@@ -73,6 +73,7 @@ function createCard(link, name) {
      popupPicture.alt = elementTitle;
   });
   return itemElement;
+
 }
 initialCards.forEach((item) => {
   const elementItem = createCard(item.link, item.name)
@@ -86,11 +87,25 @@ popupCloseImageButton.addEventListener('click', function () {
 });
 
 // создаем картинку
-elementForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const newCardEInpun = {
+// elementForm.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+//   const newCard = {
+//     place: placeInput.value,
+//     link: linkInput.value,
+//   };
+//   createCard(newCard);
+//   togglePopup(popupAdd)
+// });
+// console.log(createCard)
+
+const handleSubmit = (evt) => {
+  evt.preventDefault();
+  const todo = {
+    name: placeInput.value,
     link: linkInput.value,
-    name: placeInput.value 
-  };
-  createCard(newCardEInpun);
-});
+  }
+  createCard(todo)
+  togglePopup(popupAdd)
+}
+
+elementForm.addEventListener('submit', handleSubmit)
