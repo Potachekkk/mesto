@@ -30,14 +30,20 @@ const cardsElement = document.querySelector('.elements__container');
 const templateCards = document.querySelector('.elements__item').content;
 
 const createButton = document.querySelector('.popup__save');
-// const popupOpenImageButton = document.querySelector('.element__open-button');
-// const popupCloseImageButton = document.querySelector('.popup__close_type_image');
-// const popupImage = document.querySelector('.popup_type_open_image');
+// const popupOpenImageButton = templateCards.querySelector('.element__open-button')
+const popupCloseImageButton = document.querySelector('.popup__close_type_image');
+const popupImage = document.querySelector('.popup_type_open_image');
+
+const popupCaption = document.querySelector('.popup__figcaption');
+const popupPicture = document.querySelector('.popup__picture');
+
+const togglePopup = (popupToToggle) => popupToToggle.classList.toggle('popup_opened')
 
 // инпуты
 const placeInput = document.querySelector('.popup__input_type_name');
 const linkInput = document.querySelector('.popup__input_type_link');
 
+// форма
 const elementForm = document.querySelector('.popup__form_type_add');
 
 const deleteItem = (evt) => {
@@ -47,46 +53,44 @@ const deleteItem = (evt) => {
 
 function createCard(link, name) {
   const itemElement = templateCards.cloneNode(true);
-  itemElement.querySelector('.element__image').src = link;
-  itemElement.querySelector('.element__title').textContent = name;
-  itemElement.querySelector('.element__image').alt = name;
+  const elementImage = itemElement.querySelector('.element__image').src = link;
+  const elementTitle = itemElement.querySelector('.element__title').textContent = name;
 
-  // const pic = itemElement.querySelector('.element__image');
-  // pic.addEventListener('click', function () {
-  //   popupOpenImageButton(popupImage)
-  // });
+   // удаление
+   itemElement.querySelector('.element__delete-button').addEventListener('click', deleteItem);
 
-  itemElement.querySelector('.element__delete-button').addEventListener('click', deleteItem);
-  itemElement.querySelector('.element__like-button').addEventListener('click', function (event) {
-    event.target.classList.toggle("element__like-button_active");
-});
+   // лайк
+   itemElement.querySelector('.element__like-button').addEventListener('click', function (event) {
+     event.target.classList.toggle("element__like-button_active");
+ });
+
+ // открываем попап
+  const pic = itemElement.querySelector('.element__image');
+  pic.addEventListener('click', function () {
+     togglePopup(popupImage)
+     popupPicture.src = elementImage;
+     popupCaption.textContent = elementTitle;
+     popupPicture.alt = elementTitle;
+  });
   return itemElement;
 }
-
 initialCards.forEach((item) => {
   const elementItem = createCard(item.link, item.name)
-  // const itemElement = templateCards.cloneNode(true);
-  // itemElement.querySelector('.element__image').src = item.link;
-  // itemElement.querySelector('.element__title').textContent = item.name;
-  // itemElement.querySelector('.element__like-button').img = item.like;
-  // itemElement.querySelector('.element__delete-button').img = item.basket;
-
-//   itemElement.querySelector('.element__delete-button').addEventListener('click', deleteItem);
-//   itemElement.querySelector('.element__like-button').addEventListener('click', function (event) {
-//     event.target.classList.toggle("element__like-button_active");
-// });
   cardsElement.append(elementItem)
 })
 
-elementForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const newCardInput = {
-    link: linkInput.value,
-    name: placeInput.value
-  }
-  createCard(newCardInput);
+// закрываем попап
+popupCloseImageButton.addEventListener('click', function () {
+  togglePopup(popupImage);
+ 
 });
 
-createButton.addEventListener('click', () => {
-  popupAdd.classList.remove('popup_opened');
+// создаем картинку
+elementForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const newCardEInpun = {
+    link: linkInput.value,
+    name: placeInput.value 
+  };
+  createCard(newCardEInpun);
 });

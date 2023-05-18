@@ -3,6 +3,7 @@ const popupCloseButton = document.querySelector('.popup__close_type_profile');
 const popupOpenAddButton = document.querySelector('.profile__add-button');
 const popupCloseAddButton = document.querySelector('.popup__close_type_add');
 
+
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupAdd = document.querySelector('.popup_type_add');
 
