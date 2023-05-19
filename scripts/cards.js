@@ -40,7 +40,7 @@ const popupPicture = document.querySelector('.popup__picture');
 const togglePopup = (popupToToggle) => popupToToggle.classList.toggle('popup_opened')
 
 // инпуты
-const placeInput = document.querySelector('.popup__input_type_name');
+const placeInput = document.querySelector('.popup__input_type_place');
 const linkInput = document.querySelector('.popup__input_type_link');
 
 // форма
@@ -56,15 +56,15 @@ function createCard(link, name) {
   const elementImage = itemElement.querySelector('.element__image').src = link;
   const elementTitle = itemElement.querySelector('.element__title').textContent = name;
 
-   // удаление
-   itemElement.querySelector('.element__delete-button').addEventListener('click', deleteItem);
+  // удаление
+  itemElement.querySelector('.element__delete-button').addEventListener('click', deleteItem);
 
-   // лайк
-   itemElement.querySelector('.element__like-button').addEventListener('click', function (event) {
-     event.target.classList.toggle("element__like-button_active");
- });
+  // лайк
+  itemElement.querySelector('.element__like-button').addEventListener('click', function (event) {
+    event.target.classList.toggle("element__like-button_active");
+  });
 
- // открываем попап
+  // открываем попап
   const pic = itemElement.querySelector('.element__image');
   pic.addEventListener('click', function () {
      togglePopup(popupImage)
@@ -73,39 +73,29 @@ function createCard(link, name) {
      popupPicture.alt = elementTitle;
   });
   return itemElement;
-
 }
+
+// загружаем карточки
 initialCards.forEach((item) => {
   const elementItem = createCard(item.link, item.name)
-  cardsElement.append(elementItem)
+  cardsElement.append(elementItem) //добавляем карточки
 })
 
 // закрываем попап
 popupCloseImageButton.addEventListener('click', function () {
   togglePopup(popupImage);
  
-});
+}); 
 
-// создаем картинку
-// elementForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   const newCard = {
-//     place: placeInput.value,
-//     link: linkInput.value,
-//   };
-//   createCard(newCard);
-//   togglePopup(popupAdd)
-// });
-// console.log(createCard)
-
+// отправляем форму
 const handleSubmit = (evt) => {
-  evt.preventDefault();
-  const todo = {
-    name: placeInput.value,
-    link: linkInput.value,
-  }
-  createCard(todo)
-  togglePopup(popupAdd)
+  evt.preventDefault(); //отменяем стандартную форму
+  const todo = placeInput.value;
+  const tobe = linkInput.value;
+  createCard(todo, tobe);
+  togglePopup(popupAdd);
+  cardsElement.prepend(createCard(tobe, todo)) //добавляем карточку в начало
 }
+console.log(createCard)
 
 elementForm.addEventListener('submit', handleSubmit)
