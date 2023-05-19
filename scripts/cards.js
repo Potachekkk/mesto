@@ -91,13 +91,12 @@ popupCloseImageButton.addEventListener('click', function () {
 // обработчик отправки формы
 const handleSubmit = (evt) => {
   evt.preventDefault(); //о тменяем стандартную форму
-  const todo = placeInput.value;
-  const tobe = linkInput.value;
-  createCard(todo, tobe);
+  const placeValue = placeInput.value;
+  const linkValue = linkInput.value;
+  createCard(linkValue, placeValue);
   togglePopup(popupAdd);
-  cardsElement.prepend(createCard(tobe, todo)) // добавляем карточку в начало
+  cardsElement.prepend(createCard(linkValue, placeValue)) // добавляем карточку в начало
 }
-console.log(createCard)
 
 // отправляем форму
 elementForm.addEventListener('submit', handleSubmit)
