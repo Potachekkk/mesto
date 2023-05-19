@@ -51,11 +51,12 @@ const deleteItem = (evt) => {
   item.remove();
 }
 
+// функция создания карточки
 function createCard(link, name) {
   const itemElement = templateCards.cloneNode(true);
   const elementImage = itemElement.querySelector('.element__image').src = link;
   const elementTitle = itemElement.querySelector('.element__title').textContent = name;
-
+  itemElement.querySelector('.element__image').alt = name;
   // удаление
   itemElement.querySelector('.element__delete-button').addEventListener('click', deleteItem);
 
@@ -78,7 +79,7 @@ function createCard(link, name) {
 // загружаем карточки
 initialCards.forEach((item) => {
   const elementItem = createCard(item.link, item.name)
-  cardsElement.append(elementItem) //добавляем карточки
+  cardsElement.append(elementItem) // добавляем карточки
 })
 
 // закрываем попап
@@ -87,15 +88,16 @@ popupCloseImageButton.addEventListener('click', function () {
  
 }); 
 
-// отправляем форму
+// обработчик отправки формы
 const handleSubmit = (evt) => {
-  evt.preventDefault(); //отменяем стандартную форму
+  evt.preventDefault(); //о тменяем стандартную форму
   const todo = placeInput.value;
   const tobe = linkInput.value;
   createCard(todo, tobe);
   togglePopup(popupAdd);
-  cardsElement.prepend(createCard(tobe, todo)) //добавляем карточку в начало
+  cardsElement.prepend(createCard(tobe, todo)) // добавляем карточку в начало
 }
 console.log(createCard)
 
+// отправляем форму
 elementForm.addEventListener('submit', handleSubmit)
