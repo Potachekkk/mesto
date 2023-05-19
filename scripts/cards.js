@@ -31,7 +31,7 @@ const templateCards = document.querySelector('.elements__item').content;
 const createButton = document.querySelector('.popup__save');
 const popupCloseImageButton = document.querySelector('.popup__close_type_image');
 
-const popupImage = document.querySelector('.popup_type_open_image');
+const popupImage = document.querySelector('.popup_type_open-image');
 const popupAdd = document.querySelector('.popup_type_add');
 
 const popupCaption = document.querySelector('.popup__figcaption');
