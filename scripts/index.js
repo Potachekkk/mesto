@@ -10,6 +10,9 @@ const profileInfoTitle = document.querySelector('.profile__title');
 const profileInfoSubtitle = document.querySelector('.profile__subtitle');
 const profileForm = document.forms['profile-form']
 
+
+
+
 // переменные карточек
 const cardsElement = document.querySelector('.elements__container');
 const templateCards = document.querySelector('.elements__item').content;
