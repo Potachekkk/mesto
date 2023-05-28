@@ -1,57 +1,58 @@
+const hasInvalidInput = (inputList) => {
+    return inputList.some((inputElement) => {
+        return !inputElement.validity.valid
+    })
+}
 
-const profileSumbitButtonChangeState = (form) => {
-    const profileSubmitButton = form.querySelector('.popup__button-save')
-    console.log(profileSubmitButton)
-    if (!form.checkValidity()) {
-        profileSubmitButton.setAttribute ('disabled', true)
-        profileSubmitButton.classList.add('popup__button-sumbit_disabled')
-        profileSubmitButton.classList.remove('popup__button-save')
+const toggleButtonState = (inputList, buttonElement) => {
+    if (hasInvalidInput(inputList)) {
+      buttonElement.classList.add('popup__button-submit_disabled')
     } else {
-        profileSubmitButton.removeAttribute ('disabled')
-        profileSubmitButton.classList.add('popup__button-save')
-        profileSubmitButton.classList.remove('popup__button-sumbit_disabled')
-
+      buttonElement.classList.remove('popup__button-submit_disabled')
     }
-}
+  }
+  
+const showInputError = (formElement, inputElement, errorMessage) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+    inputElement.classList.add('popup__input_type_error');
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add('popup__error_visible')
+    };
 
-const getErrorElement = (input) => {
-    return document.querySelector(`#${input.id}-error`)
-}
+const hideInputError = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+    inputElement.classList.remove('popup__input_type_error');
+    errorElement.classList.remove('popup__error_visible')
+    errorElement.textContent = ''
+};
 
-const showError = (input) => {
-    const errorElement = getErrorElement(input);
-    errorElement.textContent = input.validationMessage;
-}
+const checkInputValidity = (formElement, inputElement) => {
+    if (!inputElement.validity.valid) {
+      showInputError(formElement, inputElement, inputElement.validationMessage); 
+      } else {
+          hideInputError(formElement, inputElement)
+        }
+  };
 
-const hideError = (input) => {
-    const errorElement = getErrorElement(input);
-    errorElement.textContent = '';
-}
-
-
-const validateInput = (input) => {
-    if (!input.validity.valid) {
-        showError(input);
-    } else {
-        hideError(input);
+const setEventListeners = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+    const buttonElement = formElement.querySelector('.popup__button-submit');
+    toggleButtonState(inputList, buttonElement);
+    inputList.forEach((inputElement) => {
+       inputElement.addEventListener('input', function () {
+     checkInputValidity(formElement, inputElement);
+     toggleButtonState(inputList, buttonElement);
+   })
+    })
     }
-}
 
-
-profileForm.addEventListener('input', (evt) => {
-    const input = evt.target;
-    validateInput(input)
-    profileSumbitButtonChangeState(form)
-}, true);
-
-const sendForm = (evt) => {
-    evt.preventDefault();
-    const form = evt.target;
-    if (!form.checkValidity()) {
-        console.log('No good');
-    } else {
-        console.log('All good');
-    }
-}
-
-profileForm.addEventListener('submit', sendForm)
+const enableValidation = () => {
+    const formList = Array.from(document.querySelectorAll('.popup__form'));
+    formList.forEach((formElement) => {
+      formElement.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+      })
+      setEventListeners(formElement);
+    })
+  }
+  enableValidation()
