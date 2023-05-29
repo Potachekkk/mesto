@@ -8,9 +8,8 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const aboutInput = document.querySelector('.popup__input_type_about');
 const profileInfoTitle = document.querySelector('.profile__title');
 const profileInfoSubtitle = document.querySelector('.profile__subtitle');
-const profileForm = document.forms['profile-form']
-
-
+const profileForm = document.forms['profile-form'];
+const popupMain = document.querySelectorAll('.popup');
 
 
 // переменные карточек
@@ -112,6 +111,26 @@ evt.target.reset();
 closePopup(popupAdd);
 };
 
+// закрываем попап по оверлею
+popupMain.forEach((popupElement) => {
+    popupElement.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close')) {
+            closePopup(popupProfile)
+            closePopup(popupAdd)
+            closePopup(popupImage)
+        }
+    })
+})
+
+// закрываем попап клавишей "Esc"
+document.addEventListener('keydown', (evt) => {
+    if (evt.code === "Escape")
+        closePopup(popupProfile);
+        closePopup(popupAdd)
+        closePopup(popupImage)
+    }
+);
+
 // слушатели
 profileOpenButton.addEventListener('click', editProfileForm);
 profileCloseButton.addEventListener('click', closeEditProfileForm);
@@ -120,3 +139,4 @@ profileCloseAddButton.addEventListener('click', closeAddCardForm);
 popupCloseImageButton.addEventListener('click', closeImagePopup);
 elementForm.addEventListener('submit', handleCardFormSubmit);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
+
