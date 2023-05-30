@@ -120,16 +120,15 @@ popupMain.forEach((popupElement) => {
             closePopup(popupImage)
         }
     })
-})
+});
 
-// закрываем попап клавишей "Esc"
 document.addEventListener('keydown', (evt) => {
-    if (evt.code === "Escape")
+    if (evt.code === "Escape") {
         closePopup(popupProfile);
         closePopup(popupAdd)
         closePopup(popupImage)
     }
-);
+});
 
 // слушатели
 profileOpenButton.addEventListener('click', editProfileForm);
