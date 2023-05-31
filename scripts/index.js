@@ -39,15 +39,13 @@ function closeImagePopup() {
   closePopup(popupImage);
 }
 function openPopup(popup) {
-  const popupForm = popup.querySelector(".popup__form_type_add");
   popup.classList.add("popup_opened");
-
-  if (popupForm !== null) {
-    clearValidate(popupForm, enableValidations);
-  }
 }
 function openAddCardForm() {
   openPopup(popupAdd);
+  if (elementForm !== null) {
+    clearValidate(elementForm, validationConfig);
+  }
 }
 function editProfileForm() {
   openPopup(popupProfile);
@@ -118,28 +116,31 @@ const handleCardFormSubmit = (evt) => {
 };
 
 // закрываем попап по оверлею
-popupMain.forEach((popupElement) => {
-  popupElement.addEventListener("mousedown", (evt) => {
-    if (
-      evt.target.classList.contains("popup_opened") ||
-      evt.target.classList.contains("popup__close")
-    ) {
-      closePopup(popupProfile);
-      closePopup(popupAdd);
-      closePopup(popupImage);
-    }
-  });
-});
-
-document.addEventListener("keydown", (evt) => {
-  if (evt.code === "Escape") {
-    closePopup(popupProfile);
-    closePopup(popupAdd);
-    closePopup(popupImage);
+const mouseDownListener = (evt) => {
+  const target = evt.target;
+  if (
+    target.classList.contains("popup_opened") ||
+    target.classList.contains("popup__close")
+  ) {
+    const popup = target.closest(".popup");
+    closePopup(popup);
   }
-});
+};
+
+//закрываем попап клавишей Esc
+const keyDownListener = (evt) => {
+  if (evt.code === "Escape") {
+    popupMain.forEach(function (popup) {
+      if (popup.classList.contains("popup_opened")) {
+        closePopup(popup);
+      }
+    });
+  }
+};
 
 // слушатели
+document.addEventListener("mousedown", mouseDownListener);
+document.addEventListener("keydown", keyDownListener);
 profileOpenButton.addEventListener("click", editProfileForm);
 profileCloseButton.addEventListener("click", closeEditProfileForm);
 profileOpenAddButton.addEventListener("click", openAddCardForm);

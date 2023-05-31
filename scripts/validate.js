@@ -1,4 +1,4 @@
-const enableValidations = {
+const validationConfig = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-submit",
@@ -17,8 +17,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement, params) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(params.inactiveButtonClass);
+    buttonElement.setAttribute("disabled", true);
   } else {
     buttonElement.classList.remove(params.inactiveButtonClass);
+    buttonElement.removeAttribute("disabled", false);
   }
 };
 
@@ -88,4 +90,4 @@ const enableValidation = (params) => {
     setEventListeners(formElement, params);
   });
 };
-enableValidation(enableValidations);
+enableValidation(validationConfig);
