@@ -28,6 +28,8 @@ const elementForm = document.forms["type-form"];
 // функции открытия и закрытия попапа
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", keyDownListener);
+  document.removeEventListener("mousedown", mouseDownListener);
 }
 function closeEditProfileForm() {
   closePopup(popupProfile);
@@ -40,6 +42,8 @@ function closeImagePopup() {
 }
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", keyDownListener);
+  document.addEventListener("mousedown", mouseDownListener);
 }
 function openAddCardForm() {
   openPopup(popupAdd);
@@ -127,20 +131,15 @@ const mouseDownListener = (evt) => {
   }
 };
 
-//закрываем попап клавишей Esc
+// закрываем попап клавишей Esc
 const keyDownListener = (evt) => {
   if (evt.code === "Escape") {
-    popupMain.forEach(function (popup) {
-      if (popup.classList.contains("popup_opened")) {
-        closePopup(popup);
-      }
-    });
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
   }
 };
 
 // слушатели
-document.addEventListener("mousedown", mouseDownListener);
-document.addEventListener("keydown", keyDownListener);
 profileOpenButton.addEventListener("click", editProfileForm);
 profileCloseButton.addEventListener("click", closeEditProfileForm);
 profileOpenAddButton.addEventListener("click", openAddCardForm);
