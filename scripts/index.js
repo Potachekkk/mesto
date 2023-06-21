@@ -1,32 +1,6 @@
+import { initialCards, validationConfig } from './constant.js';
 import Card from './Card.js'
-import FormValidator from './Formvalidator.js'
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+import { FormValidator } from './Formvalidator.js';
 
 // переменные профиля
 const profileOpenButton = document.querySelector(".profile__edit-button");
@@ -54,6 +28,12 @@ const popupPicture = document.querySelector(".popup__picture");
 const placeInput = document.querySelector(".popup__input_type_place");
 const linkInput = document.querySelector(".popup__input_type_link");
 const elementForm = document.forms["type-form"];
+
+const profileValidator = new FormValidator(validationConfig, popupProfile);
+profileValidator.enableValidation();
+
+const imageAddValidator = new FormValidator(validationConfig, popupAdd);
+imageAddValidator.enableValidation();
 
 // функции открытия и закрытия попапа
 function closePopup(popup) {
