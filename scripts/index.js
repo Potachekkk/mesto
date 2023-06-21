@@ -1,4 +1,6 @@
 import Card from './Card.js'
+import FormValidator from './Formvalidator.js'
+
 const initialCards = [
   {
     name: "Архыз",
@@ -93,14 +95,14 @@ function handleProfileFormSubmit(evt) {
   closeEditProfileForm();
 }
 
-// удаление
-const deleteItem = (evt) => {
-  evt.target.closest(".element").remove();
-};
-// лайк
-const likeItem = (evt) => {
-  evt.target.classList.toggle("element__like-button_active");
-};
+// // удаление
+// const deleteItem = (evt) => {
+//   evt.target.closest(".element").remove();
+// };
+// // лайк
+// const likeItem = (evt) => {
+//   evt.target.classList.toggle("element__like-button_active");
+// };
 
 function createCard(item) {
   const card = new Card(item, '#element', openItem);
@@ -126,10 +128,10 @@ collectCards(initialCards);
 //   elementTitle.textContent = element.name;
 //   elementImage.alt = element.name;
 
-  function openItem() {
-    popupPicture.src = elementImage.src;
-    popupCaption.textContent = elementTitle.textContent;
-    popupPicture.alt = elementTitle.textContent;
+  function openItem(name, link) {
+    popupPicture.src = link;
+    popupCaption.textContent = name;
+    popupPicture.alt = name;
     openPopup(popupImage);
   }
 
