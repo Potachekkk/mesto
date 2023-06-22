@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(value, formElement) {
     this._value = value;
     this._formSelector = value.formSelector;
@@ -9,8 +9,12 @@ class FormValidator {
     this._errorClass = value.errorClass;
 
     this._formElement = formElement;
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputSelector)
+    );
+    this._buttonElement = this._formElement.querySelector(
+      this._submitButtonSelector
+    );
   }
 
   // показать ошибку
@@ -21,7 +25,7 @@ class FormValidator {
     this._addClass(inputElement, this._inputErrorClass);
     errorElement.textContent = errorMessage;
     this._removeClass(errorElement, this._errorClass);
-  }
+  };
 
   // скрыть ошибку
   _hideInputError = (inputElement) => {
@@ -31,7 +35,7 @@ class FormValidator {
     this._removeClass(inputElement, this._inputErrorClass);
     this._removeClass(errorElement, this._errorClass);
     errorElement.textContent = "";
-  }
+  };
 
   // проверка валидности
   _checkInputValidity = (inputElement) => {
@@ -40,7 +44,7 @@ class FormValidator {
     } else {
       this._hideInputError(inputElement);
     }
-  }
+  };
 
   // установка слушателей
   _setEventListeners = () => {
@@ -50,7 +54,7 @@ class FormValidator {
         this._toggleButtonState();
       });
     });
-  }
+  };
 
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
@@ -74,7 +78,7 @@ class FormValidator {
       this._buttonElement.disabled = false;
     }
   }
-  
+
   _addClass(el, elClass) {
     el.classList.add(elClass);
   }
@@ -88,9 +92,6 @@ class FormValidator {
     this._toggleButtonState();
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
-      
     });
   }
 }
-
-export {FormValidator};

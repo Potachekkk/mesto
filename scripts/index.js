@@ -1,6 +1,6 @@
-import { initialCards, validationConfig } from './constant.js';
-import Card from './Card.js'
-import { FormValidator } from './Formvalidator.js';
+import { initialCards, validationConfig } from "./constant.js";
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 
 // переменные профиля
 const profileOpenButton = document.querySelector(".profile__edit-button");
@@ -13,7 +13,6 @@ const aboutInput = document.querySelector(".popup__input_type_about");
 const profileInfoTitle = document.querySelector(".profile__title");
 const profileInfoSubtitle = document.querySelector(".profile__subtitle");
 const profileForm = document.forms["profile-form"];
-const popupMain = document.querySelectorAll(".popup");
 
 // переменные карточек
 const cardsElement = document.querySelector(".elements__container");
@@ -29,6 +28,7 @@ const placeInput = document.querySelector(".popup__input_type_place");
 const linkInput = document.querySelector(".popup__input_type_link");
 const elementForm = document.forms["type-form"];
 
+// экземпляры класса FormValidator
 const profileValidator = new FormValidator(validationConfig, popupProfile);
 profileValidator.enableValidation();
 
@@ -75,17 +75,9 @@ function handleProfileFormSubmit(evt) {
   closeEditProfileForm();
 }
 
-// // удаление
-// const deleteItem = (evt) => {
-//   evt.target.closest(".element").remove();
-// };
-// // лайк
-// const likeItem = (evt) => {
-//   evt.target.classList.toggle("element__like-button_active");
-// };
-
+// экземпляр класса Card
 function createCard(item) {
-  const card = new Card(item, '#element', openItem);
+  const card = new Card(item, "#element", openItem);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -97,39 +89,12 @@ function collectCards(arr) {
 }
 collectCards(initialCards);
 
-// ищем и создаем карточки
-// function createCard(element) {
-//   const itemElement = templateCards.cloneNode(true);
-//   const elementImage = itemElement.querySelector(".element__image");
-//   const elementTitle = itemElement.querySelector(".element__title");
-//   const elementDelete = itemElement.querySelector(".element__delete-button");
-//   const elementLike = itemElement.querySelector(".element__like-button");
-//   elementImage.src = element.link;
-//   elementTitle.textContent = element.name;
-//   elementImage.alt = element.name;
-
-  function openItem(name, link) {
-    popupPicture.src = link;
-    popupCaption.textContent = name;
-    popupPicture.alt = name;
-    openPopup(popupImage);
-  }
-
-//   elementImage.addEventListener("click", openItem);
-//   elementDelete.addEventListener("click", deleteItem);
-//   elementLike.addEventListener("click", likeItem);
-
-//   return itemElement;
-// }
-
-// const renderElements = (element) => {
-//   cardsElement.prepend(createCard(element));
-// };
-
-// // загружаем карточки из массива
-// initialCards.forEach((element) => {
-//   renderElements(element);
-// });
+function openItem(name, link) {
+  popupPicture.src = link;
+  popupCaption.textContent = name;
+  popupPicture.alt = name;
+  openPopup(popupImage);
+}
 
 // функция добавления карточек
 const handleCardFormSubmit = (evt) => {
