@@ -4,9 +4,7 @@ import FormValidator from "./FormValidator.js";
 
 // переменные профиля
 const profileOpenButton = document.querySelector(".profile__edit-button");
-const profileCloseButton = document.querySelector(".popup__close_type_profile");
 const profileOpenAddButton = document.querySelector(".profile__add-button");
-const profileCloseAddButton = document.querySelector(".popup__close_type_add");
 const popupProfile = document.querySelector(".popup_type_profile");
 const nameInput = document.querySelector(".popup__input_type_name");
 const aboutInput = document.querySelector(".popup__input_type_about");
@@ -16,9 +14,6 @@ const profileForm = document.forms["profile-form"];
 
 // переменные карточек
 const cardsContainer = document.querySelector(".elements__container");
-const popupCloseImageButton = document.querySelector(
-  ".popup__close_type_image"
-);
 const popupImage = document.querySelector(".popup_type_open-image");
 const popupAdd = document.querySelector(".popup_type_add");
 const popupCaption = document.querySelector(".popup__figcaption");
@@ -43,12 +38,6 @@ function closePopup(popup) {
 function closeEditProfileForm() {
   closePopup(popupProfile);
 }
-function closeAddCardForm() {
-  closePopup(popupAdd);
-}
-function closeImagePopup() {
-  closePopup(popupImage);
-}
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", handleCloseByEsc);
@@ -64,6 +53,7 @@ function openEditProfileForm() {
   openPopup(popupProfile);
   nameInput.value = profileInfoTitle.textContent;
   aboutInput.value = profileInfoSubtitle.textContent;
+  profileValidator.clearValidate()
 }
 
 // функция редактирования профиля
@@ -71,6 +61,7 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileInfoTitle.textContent = nameInput.value;
   profileInfoSubtitle.textContent = aboutInput.value;
+  profileValidator.addButtonInactive()
   closeEditProfileForm();
 }
 
@@ -102,8 +93,8 @@ const handleCardFormSubmit = (evt) => {
     name: placeInput.value,
     link: linkInput.value,
   });
-  cardsContainer.prepend(newCardAdd)
-  imageAddValidator.addButtonInactive()
+  cardsContainer.prepend(newCardAdd);
+  imageAddValidator.addButtonInactive();
   evt.target.reset();
   closePopup(popupAdd);
 };
