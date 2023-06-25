@@ -67,11 +67,10 @@ export default class FormValidator {
   // изменение состояния кнопки
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
-      this._addClass(this._buttonElement, this._inactiveButtonClass);
-      this._buttonElement.setAttribute("disabled", "");
+      this.disableButton()
     } else {
       this._removeClass(this._buttonElement, this._inactiveButtonClass);
-      this._buttonElement.removeAttribute("disabled");
+      this._buttonElement.disabled = false;
     }
   }
 
@@ -83,7 +82,7 @@ export default class FormValidator {
     el.classList.remove(elClass);
   }
 
-  addButtonInactive() {
+  disableButton() {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.disabled = true;
   }

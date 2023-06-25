@@ -61,7 +61,7 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileInfoTitle.textContent = nameInput.value;
   profileInfoSubtitle.textContent = aboutInput.value;
-  profileValidator.addButtonInactive()
+  profileValidator.disableButton()
   closeEditProfileForm();
 }
 
@@ -94,7 +94,7 @@ const handleCardFormSubmit = (evt) => {
     link: linkInput.value,
   });
   cardsContainer.prepend(newCardAdd);
-  imageAddValidator.addButtonInactive();
+  imageAddValidator.disableButton();
   evt.target.reset();
   closePopup(popupAdd);
 };
