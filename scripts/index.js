@@ -1,6 +1,7 @@
 import { initialCards, validationConfig } from "./constant.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import { Section } from "./Section.js";
 
 // переменные профиля
 const profileOpenButton = document.querySelector(".profile__edit-button");
@@ -69,15 +70,24 @@ function handleProfileFormSubmit(evt) {
 function createCard(cardData) {
   const card = new Card(cardData, "#element", openImagePopup);
   const cardElement = card.generateCard();
-  return cardElement;
+  cardList.addItem(cardElement)
 }
 
-function renderInitialCards(arr) {
-  arr.forEach(function (el) {
-    cardsContainer.append(createCard(el));
-  });
-}
-renderInitialCards(initialCards);
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    createCard(item)
+  }
+}, '.elements__container')
+
+cardList.renderItems();
+
+// function renderInitialCards(arr) {
+//   arr.forEach(function (el) {
+//     cardsContainer.append(createCard(el));
+//   });
+// }
+// renderInitialCards(initialCards);
 
 function openImagePopup(name, link) {
   popupPicture.src = link;
