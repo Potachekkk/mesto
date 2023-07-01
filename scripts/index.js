@@ -2,6 +2,9 @@ import { initialCards, validationConfig } from "./constant.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { Section } from "./Section.js";
+// import { PopupWithForm } from "./PopupWithForm.js";
+// import { PopupWithImage } from "./PopupWithImage.js";
+// import { UserInfo } from "./UserInfo.js";
 
 // переменные профиля
 const profileOpenButton = document.querySelector(".profile__edit-button");
@@ -65,6 +68,10 @@ function handleProfileFormSubmit(evt) {
   profileValidator.disableButton()
   closeEditProfileForm();
 }
+
+// const popupEditProfile = new PopupWithForm(popupProfile, {
+
+// })
 
 // экземпляр класса Card
 function createCard(cardData) {
