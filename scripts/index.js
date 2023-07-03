@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { Section } from "./Section.js";
 import { PopupWithForm } from "./PopupWithForm.js";
-// import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithImage } from "./PopupWithImage.js";
 import { UserInfo } from "./UserInfo.js";
 
 // переменные профиля
@@ -25,6 +25,7 @@ const popupPicture = document.querySelector(".popup__picture");
 // const placeInput = document.querySelector(".popup__input_type_place");
 // const linkInput = document.querySelector(".popup__input_type_link");
 const cardForm = document.forms["type-form"];
+const cardTemplate = '.element';
 
 // экземпляры класса FormValidator
 const profileValidator = new FormValidator(validationConfig, popupProfile);
@@ -61,14 +62,6 @@ imageAddValidator.enableValidation();
 // }
 
 
-//Заполнение полей формы редактирования профиля
-function editProfile() {
-  const userData = profile.getUserInfo();
-  nameInput.value = userData.userName;
-  aboutInput.value = userData.userDescription;
-}
-popupEditProfile.setEventListeners()
-
 // // функция редактирования профиля
 // function handleProfileFormSubmit(evt) {
 //   evt.preventDefault();
@@ -86,6 +79,15 @@ const popupEditProfile = new PopupWithForm(popupProfile, {
   }
 })
 
+//Заполнение полей формы редактирования профиля
+function editProfile() {
+  const userData = profile.getUserInfo();
+  nameInput.value = userData.userName;
+  aboutInput.value = userData.userDescription;
+}
+popupEditProfile.setEventListeners()
+
+// экземпляр формы добавления карточки
 const popupAddCard = new PopupWithForm(popupAdd, {
   handleCardFormSubmit: (formData) => {
     cardList.addItem(formData);
@@ -103,12 +105,15 @@ const profile = new UserInfo({
 
 // экземпляр класса Card
 function createCard(cardData) {
-  const card = new Card(cardData, "#element", openImagePopup);
+  const card = new Card({cardData, handleImageClick: () => {
+    popupOpenPic.open(cardData.name, cardData.link)
+  }
+}, cardTemplate);
   const cardElement = card.generateCard();
   cardList.addItem(cardElement)
 }
 
-// const popupOpenPic = new PopupWithImage(popupImage)
+const popupOpenPic = new PopupWithImage(popupImage)
 
 const cardList = new Section({
   items: initialCards,
@@ -126,12 +131,12 @@ cardList.renderItems();
 // }
 // renderInitialCards(initialCards);
 
-function openImagePopup(name, link) {
-  popupPicture.src = link;
-  popupCaption.textContent = name;
-  popupPicture.alt = name;
-  openPopup(popupImage);
-}
+// function openImagePopup(name, link) {
+//   popupPicture.src = link;
+//   popupCaption.textContent = name;
+//   popupPicture.alt = name;
+//   openPopup(popupImage);
+// }
 
 // // функция добавления карточек
 // const handleCardFormSubmit = (evt) => {
