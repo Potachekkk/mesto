@@ -6,7 +6,8 @@ export class Section {
     }
 
     addItem(element) {
-        this._container.prepend(element);
+        const renderedItem = this._renderer(element)
+        this._container.prepend(renderedItem);
     }
 
     renderItems() {
