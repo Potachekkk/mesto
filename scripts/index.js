@@ -25,7 +25,7 @@ const popupPicture = document.querySelector(".popup__picture");
 // const placeInput = document.querySelector(".popup__input_type_place");
 // const linkInput = document.querySelector(".popup__input_type_link");
 const cardForm = document.forms["type-form"];
-const cardTemplate = '.element';
+const cardTemplate = '.elements__item';
 
 // экземпляры класса FormValidator
 const profileValidator = new FormValidator(validationConfig, popupProfile);
@@ -103,22 +103,24 @@ const profile = new UserInfo({
   profileDescription: '.profile__subtitle'
 })
 
+const popupOpenPic = new PopupWithImage(popupImage)
+
 // экземпляр класса Card
-function createCard(cardData) {
-  const card = new Card({cardData, handleImageClick: () => {
-    popupOpenPic.open(cardData.name, cardData.link)
+const createCard = (data) => {
+  const card = new Card({data, handleImageClick: () => {
+    popupOpenPic.open(data.name, data.link)
   }
 }, cardTemplate);
-  const cardElement = card.generateCard();
-  cardList.addItem(cardElement)
+  return card;
 }
 
-const popupOpenPic = new PopupWithImage(popupImage)
+popupOpenPic.setEventListeners();
 
 const cardList = new Section({
   items: initialCards,
-  renderer: (item) => {
-    createCard(item)
+  renderer: (initialCards) => {
+    const cardElement = createCard(initialCards);
+    return cardElement.generateCard()
   }
 }, '.elements__container')
 
@@ -182,5 +184,5 @@ profileOpenAddButton.addEventListener("click", () => {
   imageAddValidator._toggleButtonState();
   imageAddValidator.clearValidate();
 });
-cardForm.addEventListener("submit", handleCardFormSubmit);
-profileForm.addEventListener("submit", handleProfileFormSubmit);
+// cardForm.addEventListener("submit", handleCardFormSubmit);
+// profileForm.addEventListener("submit", handleProfileFormSubmit);
