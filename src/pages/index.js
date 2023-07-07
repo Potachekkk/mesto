@@ -1,4 +1,4 @@
-import '../pages/index.css'
+import "../pages/index.css";
 
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -12,20 +12,22 @@ import {
   popupProfile,
   nameInput,
   aboutInput,
-  popupImage, popupAdd, cardTemplate, initialCards, validationConfig
- } from '../components/constant.js';
-
+  popupImage,
+  popupAdd,
+  cardTemplate,
+  initialCards,
+  validationConfig,
+} from "../components/constant.js";
 
 // экземпляры класса FormValidator
 const profileValidator = new FormValidator(validationConfig, popupProfile);
 profileValidator.enableValidation();
-
 const imageAddValidator = new FormValidator(validationConfig, popupAdd);
 imageAddValidator.enableValidation();
 
 const userConfig = {
   nameSelector: ".profile__title",
-  descriptionSelector: ".profile__subtitle"
+  descriptionSelector: ".profile__subtitle",
 };
 
 const { nameSelector, descriptionSelector } = userConfig;
@@ -35,11 +37,10 @@ const userInfo = new UserInfo(nameSelector, descriptionSelector);
 const popupEditProfile = new PopupWithForm(popupProfile, {
   handleCardFormSubmit: (formData) => {
     userInfo.setUserInfo(formData);
-    popupEditProfile.close()
-  }
-})
-
-popupEditProfile.setEventListeners()
+    popupEditProfile.close();
+  },
+});
+popupEditProfile.setEventListeners();
 
 profileOpenButton.addEventListener("click", () => {
   const { name, description } = userInfo.getUserInfo();
@@ -53,35 +54,39 @@ profileOpenButton.addEventListener("click", () => {
 const popupAddCard = new PopupWithForm(popupAdd, {
   handleCardFormSubmit: (formData) => {
     cardList.addItem(formData);
-    popupAddCard.close()
-  }
-})
+    popupAddCard.close();
+  },
+});
 
-const popupOpenPic = new PopupWithImage(popupImage)
-popupAddCard.setEventListeners()
+const popupOpenPic = new PopupWithImage(popupImage);
+popupAddCard.setEventListeners();
 
 // экземпляр класса Card
 const createCard = (data) => {
-  const card = new Card({data, handleImageClick: () => {
-    popupOpenPic.open(data.name, data.link)
-  }
-}, cardTemplate);
+  const card = new Card(
+    {
+      data,
+      handleImageClick: () => {
+        popupOpenPic.open(data.name, data.link);
+      },
+    },
+    cardTemplate
+  );
   return card;
-}
-
+};
 popupOpenPic.setEventListeners();
 
-const cardList = new Section({
-  items: initialCards,
-  renderer: (initialCards) => {
-    const cardElement = createCard(initialCards);
-    return cardElement.generateCard()
-  }
-}, '.elements__container')
-
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (initialCards) => {
+      const cardElement = createCard(initialCards);
+      return cardElement.generateCard();
+    },
+  },
+  ".elements__container"
+);
 cardList.renderItems();
-
-// слушатели
 
 profileOpenAddButton.addEventListener("click", () => {
   popupAddCard.open();

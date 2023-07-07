@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({data, handleImageClick}, templateSelector) {
+  constructor({ data, handleImageClick }, templateSelector) {
     this._name = data.name;
     this._link = data.link;
     this._handleImageClick = handleImageClick;
@@ -9,8 +9,7 @@ export default class Card {
   _getTemplate() {
     const cardElementNew = document
       .querySelector(this._templateSelector)
-      .content
-      .querySelector(".element")
+      .content.querySelector(".element")
       .cloneNode(true);
     return cardElementNew;
   }
