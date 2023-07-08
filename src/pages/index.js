@@ -1,4 +1,4 @@
-import "../pages/index.css";
+// import "../pages/index.css";
 
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -17,7 +17,7 @@ import {
   cardTemplate,
   initialCards,
   validationConfig,
-} from "../components/constant.js";
+} from "../utils/constant.js";
 
 // экземпляры класса FormValidator
 const profileValidator = new FormValidator(validationConfig, popupProfile);
@@ -37,7 +37,6 @@ const userInfo = new UserInfo(nameSelector, descriptionSelector);
 const popupEditProfile = new PopupWithForm(popupProfile, {
   handleCardFormSubmit: (formData) => {
     userInfo.setUserInfo(formData);
-    popupEditProfile.close();
   },
 });
 popupEditProfile.setEventListeners();
@@ -46,15 +45,14 @@ profileOpenButton.addEventListener("click", () => {
   const { name, description } = userInfo.getUserInfo();
   nameInput.value = name;
   aboutInput.value = description;
-  profileValidator._toggleButtonState();
+  profileValidator.clearValidate();
   popupEditProfile.open();
 });
 
 // экземпляр формы добавления карточки
 const popupAddCard = new PopupWithForm(popupAdd, {
   handleCardFormSubmit: (formData) => {
-    cardList.addItem(formData);
-    popupAddCard.close();
+    cardList.renderItem(formData);
   },
 });
 
@@ -66,8 +64,8 @@ const createCard = (data) => {
   const card = new Card(
     {
       data,
-      handleImageClick: () => {
-        popupOpenPic.open(data.name, data.link);
+      handleImageClick: (name, link) => {
+        popupOpenPic.open(name, link);
       },
     },
     cardTemplate
@@ -90,6 +88,5 @@ cardList.renderItems();
 
 profileOpenAddButton.addEventListener("click", () => {
   popupAddCard.open();
-  imageAddValidator._toggleButtonState();
   imageAddValidator.clearValidate();
 });
