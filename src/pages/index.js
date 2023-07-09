@@ -1,4 +1,4 @@
-// import "../pages/index.css";
+import "../pages/index.css";
 
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -12,7 +12,6 @@ import {
   popupProfile,
   nameInput,
   aboutInput,
-  popupImage,
   popupAdd,
   cardTemplate,
   initialCards,
@@ -34,7 +33,7 @@ const { nameSelector, descriptionSelector } = userConfig;
 const userInfo = new UserInfo(nameSelector, descriptionSelector);
 
 // экземпляр формы редактирования профиля
-const popupEditProfile = new PopupWithForm(popupProfile, {
+const popupEditProfile = new PopupWithForm(".popup_type_profile", {
   handleCardFormSubmit: (formData) => {
     userInfo.setUserInfo(formData);
   },
@@ -50,13 +49,13 @@ profileOpenButton.addEventListener("click", () => {
 });
 
 // экземпляр формы добавления карточки
-const popupAddCard = new PopupWithForm(popupAdd, {
+const popupAddCard = new PopupWithForm(".popup_type_add", {
   handleCardFormSubmit: (formData) => {
     cardList.renderItem(formData);
   },
 });
 
-const popupOpenPic = new PopupWithImage(popupImage);
+const popupOpenPic = new PopupWithImage(".popup_type_open-image");
 popupAddCard.setEventListeners();
 
 // экземпляр класса Card
