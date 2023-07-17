@@ -18,6 +18,17 @@ import {
   validationConfig,
 } from "../utils/constant.js";
 
+fetch('https://nomoreparties.co/v1/cohort-71/users/me ', {
+  headers: {
+    authorization: 'cea06709-9d9e-4f6f-a014-355766539fc7'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  }); 
+
+
 // экземпляры класса FormValidator
 const profileValidator = new FormValidator(validationConfig, popupProfile);
 profileValidator.enableValidation();
