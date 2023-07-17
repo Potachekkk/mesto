@@ -2,7 +2,7 @@
 
 ---
 
-Сайт - https://potachekkk.github.io/mesto/
+**_[Cсылка на проект](https://potachekkk.github.io/mesto/)_**
 
 ---
 
@@ -14,10 +14,16 @@
 
 * Адаптивная верстка
 * Попап
+* Редактирование профиля
+* Добавление/удаление картинок
+* Лайк картинок
+* Валидация
+
 
 ## Технологии: 
 
 1. HTML
 2. CSS
-3. JavaScript
-4. БЭМ
+3. Язык программирования [JavaScript](https://ru.wikipedia.org/wiki/JavaScript);
+4. Файловая структура: [БЭМ Nested](https://ru.bem.info/methodology/filestructure/#nested).
+5. Проект реорганизован при помощи сборщика модулей [Webpack](https://ru.wikipedia.org/wiki/Webpack).
