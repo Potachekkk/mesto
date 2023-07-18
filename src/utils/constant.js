@@ -1,3 +1,12 @@
+
+export const apiData = {
+  url: 'https://nomoreparties.co/v1/cohort-71',
+  headers: {
+    authorization: 'cea06709-9d9e-4f6f-a014-355766539fc7',
+    'Content-type': 'application/json'
+  }
+}
+
 // переменные профиля
 export const profileOpenButton = document.querySelector(
   ".profile__edit-button"

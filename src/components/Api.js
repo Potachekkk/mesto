@@ -1,12 +1,3 @@
-fetch('https://nomoreparties.co/v1/cohort-71/users/me ', {
-  headers: {
-    authorization: 'cea06709-9d9e-4f6f-a014-355766539fc7'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); 
 
 export class Api {
   constructor(options) {
@@ -26,7 +17,7 @@ export class Api {
     .then((res) => this._checkResponse(res));
   }
 
-  getCards() {
+  getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers
     })

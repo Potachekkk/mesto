@@ -1,10 +1,13 @@
 import "../pages/index.css";
 
+import { apiData } from "../utils/constant.js";
+import { Api } from "../components/Api";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithConfirm } from "../components/PopupWithConfirm";
 import { UserInfo } from "../components/UserInfo.js";
 import {
   profileOpenButton,
@@ -18,16 +21,8 @@ import {
   validationConfig,
 } from "../utils/constant.js";
 
-fetch('https://nomoreparties.co/v1/cohort-71/users/me ', {
-  headers: {
-    authorization: 'cea06709-9d9e-4f6f-a014-355766539fc7'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); 
-
+let userId = null;
+const api = new Api(apiData)
 
 // экземпляры класса FormValidator
 const profileValidator = new FormValidator(validationConfig, popupProfile);
@@ -38,23 +33,35 @@ imageAddValidator.enableValidation();
 const userConfig = {
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__subtitle",
+  avatarSelector: ".profile__avatar",
 };
 
-const { nameSelector, descriptionSelector } = userConfig;
-const userInfo = new UserInfo(nameSelector, descriptionSelector);
+// const { nameSelector, descriptionSelector } = userConfig;
+const userInfo = new UserInfo(userConfig);
 
 // экземпляр формы редактирования профиля
 const popupEditProfile = new PopupWithForm(".popup_type_profile", {
   handleCardFormSubmit: (formData) => {
-    userInfo.setUserInfo(formData);
+    popupEditProfile.renderLoading(true)
+    api.editUserInfo(formData)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+        popupEditProfile.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupEditProfile.renderLoading(false)
+      })
   },
 });
 popupEditProfile.setEventListeners();
 
 profileOpenButton.addEventListener("click", () => {
-  const { name, description } = userInfo.getUserInfo();
-  nameInput.value = name;
-  aboutInput.value = description;
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData.name;
+  aboutInput.value = userData.description;
   profileValidator.clearValidate();
   popupEditProfile.open();
 });
@@ -66,6 +73,20 @@ const popupAddCard = new PopupWithForm(".popup_type_add", {
   },
 });
 
+// экземпляр формы подтверждения удаления карточки
+const popupDeleteCard = new PopupWithConfirm(".popup_type_delete", {
+  handleSubmitConfirm: (formdata) => {
+    api.deleteCard(formdata)
+      .then(() => {
+        popupDeleteCard.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+})
+popupDeleteCard.setEventListeners();
+
 const popupOpenPic = new PopupWithImage(".popup_type_open-image");
 popupAddCard.setEventListeners();
 
@@ -73,10 +94,23 @@ popupAddCard.setEventListeners();
 const createCard = (data) => {
   const card = new Card(
     {
-      data,
+      data, userId,
       handleImageClick: (name, link) => {
         popupOpenPic.open(name, link);
       },
+        handleDeleteClick: () => {
+          popupDeleteCard.open();
+          popupDeleteCard.handleSubmitConfirm(() => {
+            api.deleteCard(card._id)
+              .then(() => {
+                card.deleteCard();
+                popupDeleteCard.close();
+              })
+              .catch((err) => {
+                console.log(err);
+              })
+          })
+        }
     },
     cardTemplate
   );
