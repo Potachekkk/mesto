@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ data, userId, handleImageClick, handleDeleteClick, handleCardLike, templateSelector}) {
+  constructor({ data, userId, handleImageClick, handleDeleteClick, handleCardLike}, templateSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -84,6 +84,6 @@ export default class Card {
   }
 
   deleteLike = () => {
-    this._buttonLike.classList.remove('element__like-button_active');
+    this._elementLike.classList.remove('element__like-button_active');
   }
 }

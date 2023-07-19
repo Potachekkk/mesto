@@ -63,7 +63,7 @@ export class Api {
     .then((res) => this._checkResponse(res));
   }
 
-  deleteLike(cardId) {
+  deleteLike(cardID) {
     return fetch(`${this._url}/cards/${cardID}/likes`, {
       method: 'DELETE',
       headers: this._headers

@@ -40,13 +40,14 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     .catch((err) => {
         console.log(err);
     })
+  
 
 const cardList = new Section(
   {
     items: [],
     renderer: (initialCards) => {
       const cardElement = createCard(initialCards);
-      return cardElement.generateCard();
+      cardList.addItem(cardElement)
     },
   },
   ".elements__container"
@@ -123,9 +124,28 @@ profileOpenButton.addEventListener("click", () => {
 // экземпляр формы добавления карточки
 const popupAddCard = new PopupWithForm(".popup_type_add", {
   handleCardFormSubmit: (formData) => {
-    cardList.renderItem(formData);
+    // cardList.renderItem(formData);
+    popupAddCard.renderLoading(true)
+    api.sendNewCard(formData)
+      .then((data) => {
+        const card = createCard(data)
+        cardList.addItem(card)
+        popupAddCard.close()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        popupAddCard.renderLoading(false)
+      })
   },
 });
+
+profileOpenAddButton.addEventListener("click", () => {
+  popupAddCard.open();
+  imageAddValidator.clearValidate();
+});
+
 
 // экземпляр формы подтверждения удаления карточки
 const popupDeleteCard = new PopupWithConfirm(".popup_type_delete", {
@@ -189,10 +209,6 @@ const createCard = (data) => {
     },
     cardTemplate
   );
-  return card
+  return card.generateCard()
 };
 
-profileOpenAddButton.addEventListener("click", () => {
-  popupAddCard.open();
-  imageAddValidator.clearValidate();
-});
