@@ -17,18 +17,72 @@ import {
   aboutInput,
   popupAdd,
   cardTemplate,
-  initialCards,
+  popupEditAvatar,
+  formAvatar,
+  avatarInput,
   validationConfig,
+  buttonEditAvatar,
 } from "../utils/constant.js";
 
 let userId = null;
 const api = new Api(apiData)
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([userData, initialCards]) => {
+        userId = userData._id;
+
+        userInfo.setUserInfo(userData);
+        userInfo.setUserAvatar(userData);
+
+        cardList.renderItems(initialCards);
+        }
+    )
+    .catch((err) => {
+        console.log(err);
+    })
+
+const cardList = new Section(
+  {
+    items: [],
+    renderer: (initialCards) => {
+      const cardElement = createCard(initialCards);
+      return cardElement.generateCard();
+    },
+  },
+  ".elements__container"
+);
+
+const popupEditNewAvatar = new PopupWithForm('.popup_type_avatar', {
+  handleCardFormSubmit: (formData) => {
+    popupEditAvatar.renderLoading(true);
+    api.updateAvatar(formData)
+      .then((res) => {
+        userInfo.setUserAvatar(res);
+        popupEditAvatar.close();
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        popupEditAvatar.renderLoading(false)
+      })
+  }
+});
+popupEditNewAvatar.setEventListeners();
+
+//Открытие формы редактирования аватара
+buttonEditAvatar.addEventListener('click', () => {
+  popupEditNewAvatar.open();
+  avatarValidator.clearValidate();
+});
 
 // экземпляры класса FormValidator
 const profileValidator = new FormValidator(validationConfig, popupProfile);
 profileValidator.enableValidation();
 const imageAddValidator = new FormValidator(validationConfig, popupAdd);
 imageAddValidator.enableValidation();
+const avatarValidator = new FormValidator(validationConfig, popupEditAvatar);
+avatarValidator.enableValidation();
 
 const userConfig = {
   nameSelector: ".profile__title",
@@ -110,25 +164,33 @@ const createCard = (data) => {
                 console.log(err);
               })
           })
+        },
+      handleCardLike: () => {
+        if (card.isLiked()) {
+          api.deleteLike(card._id)
+            .then((data) => {
+              card.deleteLike();
+              card.setLike(data.likes);
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+        } else {
+          api.setLike(card._id)
+            .then((data) => {
+              card.addLike();
+              card.setLike(data.likes)
+            })
+            .catch((err) => {
+              console.log(err);
+            })
         }
+      }
     },
     cardTemplate
   );
-  return card;
+  return card
 };
-popupOpenPic.setEventListeners();
-
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (initialCards) => {
-      const cardElement = createCard(initialCards);
-      return cardElement.generateCard();
-    },
-  },
-  ".elements__container"
-);
-cardList.renderItems();
 
 profileOpenAddButton.addEventListener("click", () => {
   popupAddCard.open();
