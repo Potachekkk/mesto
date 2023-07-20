@@ -53,6 +53,7 @@ const cardList = new Section(
   ".elements__container"
 );
 
+// экземпляр формы редактирования аватара
 const popupEditNewAvatar = new PopupWithForm('.popup_type_avatar', {
   handleCardFormSubmit: (formData) => {
     popupEditAvatar.renderLoading(true);
@@ -90,8 +91,7 @@ const userConfig = {
   descriptionSelector: ".profile__subtitle",
   avatarSelector: ".profile__avatar",
 };
-
-// const { nameSelector, descriptionSelector } = userConfig;
+// экземпляр профиля
 const userInfo = new UserInfo(userConfig);
 
 // экземпляр формы редактирования профиля
@@ -113,6 +113,7 @@ const popupEditProfile = new PopupWithForm(".popup_type_profile", {
 });
 popupEditProfile.setEventListeners();
 
+// открытие и заполнение формы полей редактирвания профиля
 profileOpenButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
@@ -140,7 +141,9 @@ const popupAddCard = new PopupWithForm(".popup_type_add", {
       })
   },
 });
+popupAddCard.setEventListeners();
 
+// открытие формы добавления карточки
 profileOpenAddButton.addEventListener("click", () => {
   popupAddCard.open();
   imageAddValidator.clearValidate();
@@ -161,8 +164,9 @@ const popupDeleteCard = new PopupWithConfirm(".popup_type_delete", {
 })
 popupDeleteCard.setEventListeners();
 
+// экземпляр попапа просмотра карточки
 const popupOpenPic = new PopupWithImage(".popup_type_open-image");
-popupAddCard.setEventListeners();
+popupOpenPic.setEventListeners();
 
 // экземпляр класса Card
 const createCard = (data) => {

@@ -43,7 +43,7 @@ export default class Card {
     return this._cardElement;
   }
 
-  deleteItem = () => {
+  deleteCard = () => {
     this._cardElement.remove();
     this._cardElement = null;
   };
@@ -76,7 +76,7 @@ export default class Card {
 
   setLike(data) {
       this._likes = data;
-      this._likesCount.textContent = this._likes;
+      this._likesCount.textContent = this._likes.length;
   }
 
   addLike = () => {
