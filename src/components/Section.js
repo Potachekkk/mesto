@@ -6,7 +6,7 @@ export class Section {
   }
 
   renderItem(item) {
-    this.addItem(this._renderer(item))
+    this.addItem(this._renderer(item));
   }
 
   addItem(element) {
