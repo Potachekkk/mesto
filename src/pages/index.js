@@ -33,8 +33,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData);
-
+    initialCards.reverse();
     cardList.renderItems(initialCards);
+   
   })
   .catch((err) => {
     console.log(err);
@@ -85,13 +86,12 @@ imageAddValidator.enableValidation();
 const avatarValidator = new FormValidator(validationConfig, popupEditAvatar);
 avatarValidator.enableValidation();
 
-const userConfig = {
+// экземпляр профиля
+const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__subtitle",
   avatarSelector: ".profile__avatar",
-};
-// экземпляр профиля
-const userInfo = new UserInfo(userConfig);
+});
 
 // экземпляр формы редактирования профиля
 const popupEditProfile = new PopupWithForm(".popup_type_profile", {
@@ -115,9 +115,7 @@ popupEditProfile.setEventListeners();
 
 // открытие и заполнение формы полей редактирвания профиля
 profileOpenButton.addEventListener("click", () => {
-  const userData = userInfo.getUserInfo();
-  nameInput.value = userData.name;
-  aboutInput.value = userData.description;
+  popupEditProfile.setInputValues(userInfo.getUserInfo());
   profileValidator.clearValidate();
   popupEditProfile.open();
 });
@@ -150,22 +148,7 @@ profileOpenAddButton.addEventListener("click", () => {
 });
 
 // экземпляр формы подтверждения удаления карточки
-const popupDeleteCard = new PopupWithConfirm(".popup_type_delete", {
-  handleSubmitConfirm: (formdata) => {
-    popupDeleteCard.renderLoading(true);
-    api
-      .deleteCard(formdata)
-      .then(() => {
-        popupDeleteCard.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        popupDeleteCard.renderLoading(false);
-      });
-  },
-});
+const popupDeleteCard = new PopupWithConfirm(".popup_type_delete")
 popupDeleteCard.setEventListeners();
 
 // экземпляр попапа просмотра карточки

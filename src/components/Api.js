@@ -2,23 +2,25 @@ export class Api {
   constructor(options) {
     this._url = options.url;
     this._headers = options.headers;
-    this._checkResponse = (res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    };
   }
+
+_checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
-    }).then((res) => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers,
-    }).then((res) => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 
   editUserInfo(data) {
@@ -29,7 +31,7 @@ export class Api {
         name: data.name,
         about: data.about,
       }),
-    }).then((res) => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 
   sendNewCard(data) {
@@ -40,7 +42,7 @@ export class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then((res) => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 
   deleteCard(cardID) {
@@ -54,14 +56,14 @@ export class Api {
     return fetch(`${this._url}/cards/${cardID}/likes`, {
       method: "PUT",
       headers: this._headers,
-    }).then((res) => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 
   deleteLike(cardID) {
     return fetch(`${this._url}/cards/${cardID}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 
   updateAvatar(data) {
@@ -71,6 +73,6 @@ export class Api {
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    }).then((res) => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 }
