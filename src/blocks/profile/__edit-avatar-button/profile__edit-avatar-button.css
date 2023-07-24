@@ -16,7 +16,8 @@
 
 @media (max-width: 768px) {
     .profile__edit-avatar-button {
-        margin-bottom: 26px;
+        margin-bottom: 77px;
+        margin-left: 62px;
     }
 }
 
